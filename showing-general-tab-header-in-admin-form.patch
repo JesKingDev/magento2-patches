@@ -1,0 +1,28 @@
+--- Ui/DataProvider/Product/Form/Modifier/General.php.org	2017-12-18 11:36:50.207338323 +0100
++++ Ui/DataProvider/Product/Form/Modifier/General.php	2017-12-18 11:37:20.290700702 +0100
+@@ -142,8 +142,9 @@
+                 'arguments/data/config',
+                 $meta[$generalPanelCode],
+                 [
+-                    'label' => '',
+-                    'collapsible' => false,
++                    'label' => 'General',
++                    'collapsible' => true,
++                    'opened' => true,
+                 ]
+             );
+         }
+--- view/adminhtml/ui_component/category_form.xml.org	2017-12-18 11:40:27.642729749 +0100
++++ view/adminhtml/ui_component/category_form.xml	2017-12-18 11:40:36.070551121 +0100
+@@ -44,8 +44,9 @@
+     </dataSource>
+     <fieldset name="general">
+         <settings>
+-            <collapsible>false</collapsible>
+-            <label/>
++            <collapsible>true</collapsible>
++            <label translate="true">General</label>
++            <opened>true</opened>
+         </settings>
+         <field name="id" formElement="hidden">
+             <argument name="data" xsi:type="array">
