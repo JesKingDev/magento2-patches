@@ -33,6 +33,8 @@ versions). Instead, excerpt only the entry for the patch you know you need.
     "extra": {
         "patches": {
             "magento/module-catalog": {
+                "Fix: Store View specific pricing not being indexed properly":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/Patch-Magento_Catalog-M2.2-price-indexing-by-store-view.patch",
                 "Fix: https://github.com/magento/magento2/issues/5438":
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/master/Patch-Magento_Catalog-M2.1.0-image-attribute-backend-model-hardcoded-attribute-code-removal.patch",
 

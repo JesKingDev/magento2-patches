@@ -1,0 +1,20 @@
+--- a/Model/ResourceModel/Product/Collection.php
++++ b/Model/ResourceModel/Product/Collection.php
+@@ -1464,7 +1464,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Collection\Abstrac
+      */
+     public function addPriceData($customerGroupId = null, $websiteId = null)
+     {
+-        $this->_productLimitationFilters->setUsePriceIndex(true);
++        $this->_productLimitationFilters->setUsePriceIndex(false);
+ 
+         if (!isset($this->_productLimitationFilters['customer_group_id']) && is_null($customerGroupId)) {
+             $customerGroupId = $this->_customerSession->getCustomerGroupId();
+@@ -1915,7 +1915,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Collection\Abstrac
+      */
+     public function applyFrontendPriceLimitations()
+     {
+-        $this->_productLimitationFilters->setUsePriceIndex(true);
++        $this->_productLimitationFilters->setUsePriceIndex(false);
+         if (!isset($this->_productLimitationFilters['customer_group_id'])) {
+             $customerGroupId = $this->_customerSession->getCustomerGroupId();
+             $this->_productLimitationFilters['customer_group_id'] = $customerGroupId;
