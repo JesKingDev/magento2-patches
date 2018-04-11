@@ -45,8 +45,12 @@ versions). Instead, excerpt only the entry for the patch you know you need.
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/master/Patch-Magento_Catalog-M2.1.5-MAGETWO-56410-MAGETWO-56411-github-issues-5931-5612.patch"
             },
             "magento/module-customer": {
-                "Fix: https://github.com/magento/magento2/issues/10838":
+                "Fix: https://github.com/magento/magento2/issues/10838. Version < M2.2.2 only.":
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/Patch-Magento-Customer-grid-indexer-add-missing-function.patch"
+            },
+            "magento/module-framework": {
+                "Fix: https://github.com/magento/magento2/issues/10838. Version M2.2.2+":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/Patch-MAGETWO-90109-Customer_Grid_Indexer_Not_Working.patch"          
             },
             "magento/module-payment": {
                 "Fix: https://github.com/magento/magento2/pull/9365":
