@@ -32,6 +32,10 @@ versions). Instead, excerpt only the entry for the patch you know you need.
 {
     "extra": {
         "patches": {
+            "magento/framework": {
+                "Fix: https://github.com/magento/magento2/issues/13213 Version < 2.2.4 only.":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/Patch-Magento_Framework-13213_admin_customer_edit_error.patch"
+            },
             "magento/module-catalog": {
                 "Fix: Store View specific pricing not being indexed properly":
                 "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/Patch-Magento_Catalog-M2.2-price-indexing-by-store-view.patch",
