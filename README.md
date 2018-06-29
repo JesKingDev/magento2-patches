@@ -71,6 +71,10 @@ versions). Instead, excerpt only the entry for the patch you know you need.
             "magento/magento2-base": {
                 "Fix: https://github.com/magento/magento2/issues/4232":
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/master/Patch-Magento_Base-0001-MAGETWO-52850-GitHub-UTF-8-special-character-issue-i.patch"
+            },
+            "magemojo/m2-ce-cron": {
+                "Fix: https://github.com/magemojo/m2-ce-cron/issues/40":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-40_duplicate_cron_execution.diff"
             }
         }
     }

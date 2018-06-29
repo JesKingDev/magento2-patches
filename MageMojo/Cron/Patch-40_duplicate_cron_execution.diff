@@ -1,0 +1,31 @@
+From 3524d9b8520991d3a55c9ea80fc57fe595c23097 Mon Sep 17 00:00:00 2001
+From: Jessica King <jessica@jessicaking.com>
+Date: Fri, 29 Jun 2018 10:57:42 -0400
+Subject: [PATCH] issue #40 handle situations where multiple cron services are
+ running simultaneously
+
+---
+ Model/Schedule.php | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/Model/Schedule.php b/Model/Schedule.php
+index 908c413..f235d41 100644
+--- a/Model/Schedule.php
++++ b/Model/Schedule.php
+@@ -512,6 +512,13 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
+         print "Found orphaned pid file for schedule_id ".$scheduleid."\n";
+         $this->unsetPid('cron.'.$pid);
+       }
++
++      #Detect a coup and acquiesce
++      $pid = getmypid();
++      $execpid = $this->checkPid('cron.pid');
++      if ($pid !== $execpid){
++        exit;
++      }
+     }
+ 
+     /**
+-- 
+2.17.1
+
