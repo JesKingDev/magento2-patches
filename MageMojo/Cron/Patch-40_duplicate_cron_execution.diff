@@ -20,7 +20,7 @@ index 908c413..f235d41 100644
 +      #Detect a coup and acquiesce
 +      $pid = getmypid();
 +      $execpid = $this->checkPid('cron.pid');
-+      if ($pid !== $execpid){
++      if ($pid != $execpid){
 +        exit;
 +      }
      }
