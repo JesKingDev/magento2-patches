@@ -1,0 +1,27 @@
+From 7f6871671fc546cb451264941f84e3ea0f8d375d Mon Sep 17 00:00:00 2001
+From: Jessica King <jess@rockitsolutionsgroup.com>
+Date: Sat, 28 Jul 2018 20:16:25 -0400
+Subject: [PATCH] #44 suspend cron execution in maint mode if no exempt IPs
+
+---
+ Model/Schedule.php | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Model/Schedule.php b/Model/Schedule.php
+index 23786ed..d352b82 100644
+--- a/Model/Schedule.php
++++ b/Model/Schedule.php
+@@ -328,7 +328,9 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
+           return false;
+         }
+       }
+-      $maint = $this->maintenance->isOn();
++      $exempt = $this->maintenance->getAddressInfo();
++      /* Suspend crons in maintenance mode if no internal testing IPs are present */
++      $maint = $this->maintenance->isOn() && empty($exempt);
+       if ($maint) {
+          print "Crons suspended due to maintenance mode being enabled \n";
+          return false;
+-- 
+2.17.1
+
