@@ -8,7 +8,7 @@ The patches have been created to be used for composer M2 projects.
 So if you have used steps described at http://devdocs.magento.com/guides/v2.0/install-gde/prereq/integrator_install.html, 
 you should have a M2 project that has composer.json at it's core that dicrates which packages are installed.
 
-1. In project root folder: composer require cweagans/composer-patches=~1.4.0
+1. In project root folder: composer require vaimo/composer-patches
 2. Copy the patches you want to use under <project-root>/patches
 3. The project composer.json should also already have an "extra" key defined. if you add new sub-key there called 
    "patches" (see above), then the next time you do "composer update", the modules that have patches defined will 
