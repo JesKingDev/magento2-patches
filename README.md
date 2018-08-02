@@ -1,5 +1,5 @@
 # magento2-patches
-Patches that relate to specific PR's to be used with https://github.com/cweagans/composer-patches
+Patches that relate to specific PR's to be used with https://github.com/vaimo/composer-patches
 
 ## Usage
 
@@ -20,7 +20,7 @@ you should have a M2 project that has composer.json at it's core that dicrates w
 {
 
     "require": {
-        "cweagans/composer-patches": "~1.4.0",
+        "vaimo/composer-patches": "~1.4.0",
     },
 
     "extra": {
