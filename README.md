@@ -18,11 +18,6 @@ you should have a M2 project that has composer.json at it's core that dicrates w
    
 ```json
 {
-
-    "require": {
-        "vaimo/composer-patches": "~1.4.0",
-    },
-
     "extra": {
         "patches": {
             "magento/module-catalog": {
@@ -33,6 +28,5 @@ you should have a M2 project that has composer.json at it's core that dicrates w
             },
         }
     }
-
 }
 ```
