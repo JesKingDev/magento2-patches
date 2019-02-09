@@ -1,0 +1,27 @@
+From 48340876da1711c71521301f4850940a5b088353 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Dani=C4=93ls=20Kurs=C4=ABts?= <daniels.kursits@gmail.com>
+Date: Wed, 19 Dec 2018 11:54:02 +0200
+Subject: [PATCH] Fix missing class exception
+
+Magento doesn't seem to tolerate whitespace in class strings, causing `Class Mirasvit\Blog\Ui\Post\Form\Control\SaveAndContinueButton  does not exist` exception in `admin/blog/post/edit`, this fixes it.
+---
+ view/adminhtml/ui_component/blog_post_form.xml | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/view/adminhtml/ui_component/blog_post_form.xml b/view/adminhtml/ui_component/blog_post_form.xml
+index f36e04d..980bace 100644
+--- a/view/adminhtml/ui_component/blog_post_form.xml
++++ b/view/adminhtml/ui_component/blog_post_form.xml
+@@ -18,8 +18,7 @@
+             <item name="back" xsi:type="string">Mirasvit\Blog\Ui\Post\Form\Control\BackButton</item>
+             <item name="delete" xsi:type="string">Mirasvit\Blog\Ui\Post\Form\Control\DeleteButton</item>
+             <item name="save" xsi:type="string">Mirasvit\Blog\Ui\Post\Form\Control\SaveButton</item>
+-            <item name="save_and_continue" xsi:type="string">Mirasvit\Blog\Ui\Post\Form\Control\SaveAndContinueButton
+-            </item>
++            <item name="save_and_continue" xsi:type="string">Mirasvit\Blog\Ui\Post\Form\Control\SaveAndContinueButton</item>
+         </item>
+     </argument>
+     <dataSource name="blog_post_form_data_source">
+-- 
+2.18.0
+
