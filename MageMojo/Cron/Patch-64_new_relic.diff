@@ -1,0 +1,32 @@
+From 1768152bae013c6787c45520d632f0aa336d701a Mon Sep 17 00:00:00 2001
+From: Jessica King <jessica@jessicaking.com>
+Date: Fri, 22 Feb 2019 15:31:17 -0500
+Subject: [PATCH] #64 support NewRelic transaction name for cron jobs
+
+---
+ Model/Schedule.php | 1 +
+ Model/stub.txt     | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Model/Schedule.php b/Model/Schedule.php
+index 4df2f3b..e4da75f 100644
+--- a/Model/Schedule.php
++++ b/Model/Schedule.php
+@@ -322,6 +322,7 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
+       $code = str_replace('<<method>>',$jobconfig["method"],$code);
+       $code = str_replace('<<instance>>',$jobconfig["instance"],$code);
+       $code = str_replace('<<scheduleid>>',$scheduleid,$code);
++      $code = str_replace('<<name>>',$jobconfig["name"],$code);
+       return $code;
+     }
+ 
+diff --git a/Model/stub.txt b/Model/stub.txt
+index dc8a177..8d00afa 100644
+--- a/Model/stub.txt
++++ b/Model/stub.txt
+@@ -1 +1 @@
+-require "<<basedir>>/app/bootstrap.php"; $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $areaList = $obj->get("Magento\Framework\App\AreaList"); $areaList->getArea("crontab")->load("translate"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);
++require "<<basedir>>/app/bootstrap.php"; if (extension_loaded ('newrelic')) { newrelic_name_transaction (<<name>>);} $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $areaList = $obj->get("Magento\Framework\App\AreaList"); $areaList->getArea("crontab")->load("translate"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);
+-- 
+2.18.0
+
