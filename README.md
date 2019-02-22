@@ -77,8 +77,10 @@ versions). Instead, excerpt only the entry for the patch you know you need.
                 "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-40_duplicate_cron_execution.diff",
                 "Fix: https://github.com/magemojo/m2-ce-cron/issues/44 (Version < 1.2.5 only)":
                 "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-44_maintenance_exempt_ips.diff",
-                "Fix: https://github.com/magemojo/m2-ce-cron/issues/64":
-                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-64_new_relic.diff"
+                "Fix: https://github.com/magemojo/m2-ce-cron/issues/64 (patches master)":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-64_new_relic.diff",
+                "Fix: https://github.com/magemojo/m2-ce-cron/issues/64 (patches v1.2.7)":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-64_new_relic_1-2-7.diff"
             },
             "mirasvit/module-blog": {
                 "Fix: https://github.com/mirasvit/module-blog/issues/136": 
