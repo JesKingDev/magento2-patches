@@ -1,0 +1,55 @@
+--- Model/Rule/Condition/Product.php.org	2017-07-10 11:28:51.251178098 +0200
++++ Model/Rule/Condition/Product.php	2017-07-10 11:44:17.984313739 +0200
+@@ -33,6 +33,16 @@
+     protected $storeManager;
+ 
+     /**
++     * @var \Magento\Catalog\Helper\Product\Flat\Indexer
++     */
++    protected $productFlatIndexerHelper;
++
++    /**
++     * @var null|array
++     */
++    protected $flatColumns;
++
++    /**
+      * @param \Magento\Rule\Model\Condition\Context $context
+      * @param \Magento\Backend\Helper\Data $backendData
+      * @param \Magento\Eav\Model\Config $config
+@@ -42,6 +52,7 @@
+      * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\Collection $attrSetCollection
+      * @param \Magento\Framework\Locale\FormatInterface $localeFormat
+      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
++     * @param \Magento\Catalog\Helper\Product\Flat\Indexer $productFlatIndexerHelper 
+      * @param array $data
+      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+      */
+@@ -55,9 +66,11 @@
+         \Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\Collection $attrSetCollection,
+         \Magento\Framework\Locale\FormatInterface $localeFormat,
+         \Magento\Store\Model\StoreManagerInterface $storeManager,
++        \Magento\Catalog\Helper\Product\Flat\Indexer $productFlatIndexerHelper,
+         array $data = []
+     ) {
+         $this->storeManager = $storeManager;
++        $this->productFlatIndexerHelper = $productFlatIndexerHelper;
+         parent::__construct(
+             $context,
+             $backendData,
+@@ -113,7 +126,14 @@
+     {
+         $attribute = $this->getAttributeObject();
+ 
+-        if ($collection->isEnabledFlat()) {
++        if ($this->flatColumns === null) {
++            $this->flatColumns = array_flip(array_merge(
++                array_keys($this->productFlatIndexerHelper->getFlatColumnsDdlDefinition()),
++                $this->productFlatIndexerHelper->getAttributeCodes()
++            ));
++        } 
++        
++        if ($collection->isEnabledFlat() && isset($this->flatColumns[$attribute->getAttributeCode()])) {
+             $alias = array_keys($collection->getSelect()->getPart('from'))[0];
+             $this->joinedAttributes[$attribute->getAttributeCode()] = $alias . '.' . $attribute->getAttributeCode();
+             return $this;

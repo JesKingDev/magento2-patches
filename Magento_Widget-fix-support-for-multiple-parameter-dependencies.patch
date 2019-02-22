@@ -1,0 +1,56 @@
+--- etc/widget.xsd.org	2017-03-09 23:15:28.210504683 +0100
++++ etc/widget.xsd	2017-03-09 23:15:32.122359252 +0100
+@@ -209,8 +209,8 @@
+         <xs:annotation>
+             <xs:documentation>List of parameters this parameter depends on.</xs:documentation>
+         </xs:annotation>
+-        <xs:all>
++        <xs:choice maxOccurs="unbounded">
+             <xs:element name="parameter" type="dependsParameterType" />
+-        </xs:all>
++        </xs:choice>
+     </xs:complexType>
+ </xs:schema>
+--- etc/widget_file.xsd.org	2017-03-09 23:15:52.457603263 +0100
++++ etc/widget_file.xsd	2017-03-09 23:15:56.977435232 +0100
+@@ -209,8 +209,8 @@
+         <xs:annotation>
+             <xs:documentation>List of parameters this parameter depends on.</xs:documentation>
+         </xs:annotation>
+-        <xs:all>
++        <xs:choice maxOccurs="unbounded">
+             <xs:element name="parameter" type="dependsParameterType" />
+-        </xs:all>
++        </xs:choice>
+     </xs:complexType>
+ </xs:schema>
+--- Model/Config/Converter.php.org	2017-03-09 23:28:51.660635367 +0100
++++ Model/Config/Converter.php	2017-03-09 23:34:34.083905332 +0100
+@@ -231,11 +231,22 @@
+                 );
+             }
+             $parameterAttributes = $childNode->attributes;
+-            $depends[$parameterAttributes->getNamedItem(
+-                'name'
+-            )->nodeValue] = [
+-                'value' => $parameterAttributes->getNamedItem('value')->nodeValue,
+-            ];
++
++            $dependencyName = $parameterAttributes->getNamedItem('name')->nodeValue;
++            $dependencyValue = $parameterAttributes->getNamedItem('value')->nodeValue;
++
++            if (!isset($depends[$dependencyName])) {
++                $depends[$dependencyName] = [
++                    'value' => $dependencyValue,
++                ];
++
++                continue;
++            } else if (!isset($depends[$dependencyName]['values'])) {
++                $depends[$dependencyName]['values'] = [$depends[$dependencyName]['value']];
++                unset($depends[$dependencyName]['value']);
++            }
++
++            $depends[$dependencyName]['values'][] = $dependencyValue;
+         }
+         return $depends;
+     }
