@@ -32,3 +32,31 @@ index 804aa5f..a832c87 100644
 -- 
 2.18.0
 
+From b609cecb0f8a17920de008bc773ac149274ccc7f Mon Sep 17 00:00:00 2001
+From: Jessica King <jessica@jessicaking.com>
+Date: Fri, 22 Feb 2019 19:56:17 -0500
+Subject: [PATCH] Name the MageMojo Cron Service for NewRelic
+
+---
+ Model/Schedule.php | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/Model/Schedule.php b/Model/Schedule.php
+index ebbd611..9c5a770 100644
+--- a/Model/Schedule.php
++++ b/Model/Schedule.php
+@@ -394,6 +394,11 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
+       #Force UTC
+       date_default_timezone_set('UTC');
+
++      #Set transaction name for New Relic, if installed
++      if (extension_loaded ('newrelic')) {
++          newrelic_name_transaction ('magemojo_cron_service');
++      }
++
+       print "Starting Service\n";
+       #Loop until killed or heat death of the universe
+       while (true) {
+--
+2.18.0
+
