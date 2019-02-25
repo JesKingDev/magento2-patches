@@ -28,8 +28,8 @@ index 804aa5f..a832c87 100644
 +++ b/Model/stub.txt
 @@ -1 +1 @@
 -require "<<basedir>>/app/bootstrap.php"; $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);
-+require "<<basedir>>/app/bootstrap.php"; if (extension_loaded ('newrelic')) { newrelic_name_transaction (<<name>>);} $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);
--- 
++require "<<basedir>>/app/bootstrap.php"; if (extension_loaded ('newrelic')) { newrelic_name_transaction ("<<name>>");} $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);
+--
 2.18.0
 
 From b609cecb0f8a17920de008bc773ac149274ccc7f Mon Sep 17 00:00:00 2001
