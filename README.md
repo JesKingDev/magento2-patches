@@ -85,8 +85,11 @@ versions). Instead, excerpt only the entry for the patch you know you need.
             "mirasvit/module-blog": {
                 "Fix: https://github.com/mirasvit/module-blog/issues/136": 
                 "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/Mirasvit/module-blog/136__fix_class_exception.diff"
+            },
+            "leanswift/module-econnect": {
+                "Fix: https://leanswift.atlassian.net/browse/ECNT-627": 
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/LeanSwift/Econnect/ECNT-627_adrt_18-2-4-1.diff"
             }
-
         }
     }
 }

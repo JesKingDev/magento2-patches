@@ -1,0 +1,57 @@
+From 5d9cfff24140e7f867469c2cb4c158b5aaa8c463 Mon Sep 17 00:00:00 2001
+From: Jessica King <jessica@jessicaking.com>
+Date: Wed, 6 Mar 2019 21:50:35 -0500
+Subject: [PATCH] ECNT-627 address type improperly assigned
+
+---
+ Helper/Erpapi.php     | 5 +++++
+ Model/Sales/Order.php | 6 +++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/Helper/Erpapi.php b/Helper/Erpapi.php
+index 029d63f..badfd10 100644
+--- a/Helper/Erpapi.php
++++ b/Helper/Erpapi.php
+@@ -98,6 +98,11 @@ class Erpapi extends AbstractHelper
+      */
+     const SHIPPING = '01';
+ 
++    /**
++     * Service Address code
++     */
++    const SERVICE = '04';
++
+     /**
+      * Order Address Method
+      */
+diff --git a/Model/Sales/Order.php b/Model/Sales/Order.php
+index 4ed5c70..5d1b395 100644
+--- a/Model/Sales/Order.php
++++ b/Model/Sales/Order.php
+@@ -392,12 +392,12 @@ class Order extends AbstractModel
+         $storeId = $this->_getStoreId();
+         //Prepare billing address. Don't change $orderAddress key value.
+         $orderAddress['0'] = $this->getAddressPostData($this->getOrder()->getBillingAddress(), false);
+-        $orderAddress['0']['ADRT'] = 1;
++        $orderAddress['0']['ADRT'] = Erpapi::BILLING;
+         //Prepare shipping address. Don't change $orderAddress key value.
+         $shippingAddress = $this->getAddressPostData($this->getOrder()->getShippingAddress(), false);
+         if ($shippingAddress) {
+             $orderAddress['1'] = $shippingAddress;
+-            $orderAddress['1']['ADRT'] = 3;
++            $orderAddress['1']['ADRT'] = Erpapi::SHIPPING;
+             if ($this->getOrder()->getShippingMethod()) {
+                 $erpDeliveryInfo = $this->_helper->getERPDeliveryInfo($this->getOrder()->getShippingMethod(), $storeId);
+                 if ($erpDeliveryInfo) {
+@@ -416,7 +416,7 @@ class Order extends AbstractModel
+         $serviceAddress = $this->_getServicePointAddressData();
+         if ($serviceAddress) {
+             $orderAddress['3'] = $serviceAddress;
+-            $orderAddress['3']['ADRT'] = 4;
++            $orderAddress['3']['ADRT'] = Erpapi::SERVICE;
+         }
+         $orderData['addBatchAddress'] = $orderAddress;
+         return $orderData;
+-- 
+2.18.0
+
