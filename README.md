@@ -48,6 +48,10 @@ versions). Instead, excerpt only the entry for the patch you know you need.
                 "Fix: https://github.com/magento/magento2/issues/5931 and https://github.com/magento/magento2/issues/5612":
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/master/Patch-Magento_Catalog-M2.1.5-MAGETWO-56410-MAGETWO-56411-github-issues-5931-5612.patch"
             },
+            "magento/module-configurable-product": {
+            	"Fix: Configurable attribute options are not sorted / https://github.com/magento/magento2/issues/7441":
+            	"https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/0001-Patch-config-product-attribute-sort-order.patch"
+            }
             "magento/module-customer": {
                 "Fix: https://github.com/magento/magento2/issues/10838. Version < M2.2.2 only.":
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/Patch-Magento-Customer-grid-indexer-add-missing-function.patch"

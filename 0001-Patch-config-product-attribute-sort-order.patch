@@ -1,0 +1,73 @@
+From 8a3c276d7fe7fa52e1df2d49923c742cf0f419dc Mon Sep 17 00:00:00 2001
+From: Ward Cappelle <ward.cappelle@studioemma.com>
+Date: Tue, 2 Jan 2018 13:45:57 +0100
+Subject: [PATCH] Patch config product attribute sort order
+
+See GitHub issue #7441 and Magento internal MAGETWO-61484
+---
+ Model/ResourceModel/Product/Type/Configurable.php              |  6 ++++++
+ .../Unit/Model/ResourceModel/Product/Type/ConfigurableTest.php | 10 ++++++++--
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/Model/ResourceModel/Product/Type/Configurable.php b/Model/ResourceModel/Product/Type/Configurable.php
+index 5ae4231..2502be3 100644
+--- a/Model/ResourceModel/Product/Type/Configurable.php
++++ b/Model/ResourceModel/Product/Type/Configurable.php
+@@ -273,6 +273,12 @@ class Configurable extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+                 ]
+             ),
+             []
++        )->joinInner(
++            ['attribute_opt' => $this->getTable('eav_attribute_option')],
++            'attribute_opt.option_id = entity_value.value',
++            []
++        )->order(
++            'attribute_opt.sort_order ASC'
+         )->where(
+             'super_attribute.product_id = ?',
+             $productId
+diff --git a/Test/Unit/Model/ResourceModel/Product/Type/ConfigurableTest.php b/Test/Unit/Model/ResourceModel/Product/Type/ConfigurableTest.php
+index eeb37a2..7f78e82 100644
+--- a/Test/Unit/Model/ResourceModel/Product/Type/ConfigurableTest.php
++++ b/Test/Unit/Model/ResourceModel/Product/Type/ConfigurableTest.php
+@@ -185,7 +185,7 @@ class ConfigurableTest extends \PHPUnit_Framework_TestCase
+             ->method('getData')
+             ->with('link')
+             ->willReturn('getId value');
+-        $configurable->expects($this->exactly(7))
++        $configurable->expects($this->exactly(8))
+             ->method('getTable')
+             ->will(
+                 $this->returnValueMap(
+@@ -197,6 +197,7 @@ class ConfigurableTest extends \PHPUnit_Framework_TestCase
+                         ['catalog_product_entity', 'catalog_product_entity value'],
+                         ['eav_attribute_option_value', 'eav_attribute_option_value value'],
+                         ['catalog_product_super_attribute_label', 'catalog_product_super_attribute_label value'],
++                        ['eav_attribute_option', 'eav_attribute_option value']
+                     ]
+                 )
+             );
+@@ -246,7 +247,7 @@ class ConfigurableTest extends \PHPUnit_Framework_TestCase
+         $attributes = [
+             $superAttribute,
+         ];
+-        $select->expects($this->exactly(5))
++        $select->expects($this->exactly(6))
+             ->method('joinInner')
+             ->will($this->returnSelf())
+             ->withConsecutive(
+@@ -281,6 +282,11 @@ class ConfigurableTest extends \PHPUnit_Framework_TestCase
+                         ]
+                     ),
+                     [],
++                ],
++                [
++                    ['attribute_opt' => 'eav_attribute_option value'],
++                    'attribute_opt.option_id = entity_value.value',
++                    []
+                 ]
+             );
+         $select->expects($this->exactly(2))
+-- 
+2.15.1
+
