@@ -1,0 +1,13 @@
+diff --git a/etc/di.xml b/etc/di.xml
+index 625ec76..7569c34 100644
+--- a/etc/di.xml
++++ b//etc/di.xml
+@@ -7,7 +7,7 @@
+ -->
+ <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+     <type name="Magento\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider">
+-        <!--plugin name="stockedProductsFilterPlugin" disabled="true"/-->
++        <!--plugin name="stockedProductsFilterPlugin" disabled="true" /-->
+         <plugin name="stockedProductFilterByInventoryStockPlugin" type="Magento\InventoryElasticsearch\Plugin\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider\StockedProductFilterByInventoryStock"/>
+     </type>
+ </config>
