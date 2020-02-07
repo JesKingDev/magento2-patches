@@ -8,8 +8,8 @@ The patches have been created to be used for composer M2 projects.
 1. In project root folder, run these commands:
 
 ```bash
-composer config repositories.ripen-patches vcs https://github.com/ripenecommerce/magento2-patches.git
-composer require ripenecommerce/magento2-patches=dev-master
+composer config repositories.jeskingdev-patches vcs https://github.com/jeskingdev/magento2-patches.git
+composer require jeskingdev/magento2-patches=dev-master
 ```
 
 2. The project `composer.json` should also already have an "extra" key defined. Add a new sub-key there called 
@@ -84,7 +84,10 @@ versions). Instead, excerpt only the entry for the patch you know you need.
                 "Fix: https://github.com/magemojo/m2-ce-cron/issues/64 (patches master)":
                 "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-64_new_relic.diff",
                 "Fix: https://github.com/magemojo/m2-ce-cron/issues/64 (patches v1.2.7)":
-                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-64_new_relic_1-2-7.diff"
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-64_new_relic_1-2-7.diff",
+                "Instrument New Relic for jobs only, not service (patches v1.3.0)":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch_new_relic-ignore-service.diff"
+                            
             },
             "mirasvit/module-blog": {
                 "Fix: https://github.com/mirasvit/module-blog/issues/136": 

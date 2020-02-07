@@ -1,0 +1,16 @@
+diff --git a/Model/Schedule.php b/Model/Schedule.php
+index 913d533..f3e480a 100644
+--- a/Model/Schedule.php
++++ b/Model/Schedule.php
+@@ -435,9 +435,9 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
+       #Force UTC
+       date_default_timezone_set('UTC');
+ 
+-      #Set transaction name for New Relic, if installed
++      #If New Relic is installed, do not instrument the cron service itself. TODO - support turning instrumentation on/off from admin
+       if (extension_loaded ('newrelic')) {
+-        newrelic_name_transaction ('magemojo_cron_service');
++          newrelic_ignore_transaction();
+       }
+ 
+       print "Starting Service\n";
