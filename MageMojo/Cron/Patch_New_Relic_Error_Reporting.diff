@@ -1,0 +1,14 @@
+diff --git a/Model/Schedule.php b/Model/Schedule.php
+index edcdc31..8f8879e 100644
+--- a/Model/Schedule.php
++++ b/Model/Schedule.php
+@@ -427,6 +427,9 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
+             #If output had "error" in the text, assume it errored
+             if (strpos(strtolower($output),'error') > 0) {
+               $this->setJobStatus($scheduleid,'error',$output);
++              if (extension_loaded ('newrelic')) {
++                  newrelic_notice_error(E_ERROR , $output);
++              }
+             } else {
+               $this->setJobStatus($scheduleid,'success',$output);
+             }

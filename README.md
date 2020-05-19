@@ -77,6 +77,8 @@ versions). Instead, excerpt only the entry for the patch you know you need.
                 "https://raw.githubusercontent.com/ripenecommerce/magento2-patches/master/Patch-Magento_Base-0001-MAGETWO-52850-GitHub-UTF-8-special-character-issue-i.patch"
             },
             "magemojo/m2-ce-cron": {
+                "Report all cron errors to NewRelic (patches 1.2.9)":
+                "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch_New_Relic_Error_Reporting.diff",
                 "Fix: https://github.com/magemojo/m2-ce-cron/issues/40 (Version < 1.2.3 only)":
                 "https://raw.githubusercontent.com/JesKingDev/magento2-patches/master/MageMojo/Cron/Patch-40_duplicate_cron_execution.diff",
                 "Fix: https://github.com/magemojo/m2-ce-cron/issues/44 (Version < 1.2.5 only)":
