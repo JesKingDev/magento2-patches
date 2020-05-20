@@ -1,14 +1,7 @@
-diff --git a/Model/Schedule.php b/Model/Schedule.php
-index edcdc31..8f8879e 100644
---- a/Model/Schedule.php
-+++ b/Model/Schedule.php
-@@ -427,6 +427,9 @@ class Schedule extends \Magento\Framework\Model\AbstractModel
-             #If output had "error" in the text, assume it errored
-             if (strpos(strtolower($output),'error') > 0) {
-               $this->setJobStatus($scheduleid,'error',$output);
-+              if (extension_loaded ('newrelic')) {
-+                  newrelic_notice_error(E_ERROR , $output);
-+              }
-             } else {
-               $this->setJobStatus($scheduleid,'success',$output);
-             }
+diff --git a/Model/stub.txt b/Model/stub.txt
+index 2837c43..36823a4 100644
+--- a/Model/stub.txt
++++ b/Model/stub.txt
+@@ -1 +1 @@
+-require "<<basedir>>/app/bootstrap.php"; if (extension_loaded ("newrelic")) { newrelic_name_transaction ("<<name>>");} $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $areaList = $obj->get("Magento\Framework\App\AreaList"); $areaList->getArea("crontab")->load("translate"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);
++require "<<basedir>>/app/bootstrap.php"; if (extension_loaded ("newrelic")) { newrelic_name_transaction ("<<name>>");} try{ $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER); $obj = $bootstrap->getObjectManager(); $scheduleid = <<scheduleid>>; $state = $obj->get("Magento\Framework\App\State"); $state->setAreaCode("crontab"); $areaList = $obj->get("Magento\Framework\App\AreaList"); $areaList->getArea("crontab")->load("translate"); $instance = $obj->get("<<instance>>"); $schedule = $obj->get("\Magento\Cron\Model\Schedule")->load($scheduleid); $instance-><<method>>($schedule);} catch (Throwable $t) { if (extension_loaded ("newrelic")){newrelic_notice_error($t);} echo "Cron Execution Error",$t->getMessage(),"\n";}
